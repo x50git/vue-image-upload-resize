@@ -1,7 +1,7 @@
 <template>
   <div>
     <img v-show="imagePreview" v-for="(preview, index) in imagePreview" :key="index" :src="preview" class="img-preview" width="400" />
-    <input :id="id" :class="className" type="file" @change="uploadFile" :accept="accept" :capture="capture" :multiple="multiple" />
+    <input :id="id" :class="className" type="file" @change="uploadFile" :accept="accept" :capture="capture" :multiple="multiple" :name="name" />
     <slot name="upload-label"></slot>
   </div>
 </template>
@@ -10,7 +10,7 @@
 /**
  * A Vue component for multiple file upload w/ client-side resizing & compression of images.
  *
- * Code based on 
+ * Code based on
  *  - ImageUploader (c) Ross Turner (https://github.com/rossturner/HTML5-ImageUploader), and
  *  - vue-upload-image-resize (https://github.com/kartoteket/vue-image-upload-resize), and
  *  - exif.js (https://github.com/exif-js/exif-js)
@@ -197,6 +197,16 @@ export default {
     multiple: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * Name attribute used for the form's input element.
+     * @default 'fileInput'
+     * @type {String}
+     */
+    name: {
+      type: String,
+      default: 'fileInput',
     },
   },
 
