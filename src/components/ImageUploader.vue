@@ -1,28 +1,24 @@
 <template>
   <div>
-    <img v-show="imagePreview" :src="imagePreview" class="img-preview" width="400" /> <input :id="id" :class="className" type="file" @change="uploadFile" :accept="accept" :capture="capture" />
+    <img v-show="imagePreview" v-for="(preview, index) in imagePreview" :key="index" :src="preview" class="img-preview" width="400" />
+    <input :id="id" :class="className" type="file" @change="uploadFile" :accept="accept" :capture="capture" :multiple="multiple" />
     <slot name="upload-label"></slot>
   </div>
 </template>
 
 <script>
 /**
- * vue-ImageUploader: a to-the-point vue-component for client-side image upload with resizing of images (JPG, PNG, GIF)
+ * A Vue component for multiple file upload w/ client-side resizing & compression of images.
  *
- * Code based on ImageUploader (c) Ross Turner (https://github.com/rossturner/HTML5-ImageUploader) and
- * exif.js (https://github.com/exif-js/exif-js) for JPEG autoRotate functions
- * Adapted for Vue by Svale Fossåskaret / Kartoteket with some modifications.
+ * Code based on 
+ *  - ImageUploader (c) Ross Turner (https://github.com/rossturner/HTML5-ImageUploader), and
+ *  - vue-upload-image-resize (https://github.com/kartoteket/vue-image-upload-resize), and
+ *  - exif.js (https://github.com/exif-js/exif-js)
  *
  *
- * TODO Items:
- * 1. Progress Report
- * 2. Multiple Files / async handling
- * 3. Support custom completion callback
- * 4. Propper unit testing with https://github.com/visionmedia/supertest
+ * LICENSE
  *
- * LICENSE (from original ImageUploader files by Ross Turner):
- *
- * Copyright (c) 2012 Ross Turner and contributors (https://github.com/zsinj)
+ * Copyright (c) 2020
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -192,11 +188,21 @@ export default {
       type: Number,
       default: 0,
     },
+
+    /**
+     * Sets an optional multiple attribute, to allow/disallow multiple uploads
+     * @default false
+     * @type {Boolean}
+     */
+    multiple: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data() {
     return {
-      imagePreview: null,
+      imagePreview: [],
       currentFile: {},
       dimensions: {},
       exifData: {},
@@ -209,11 +215,14 @@ export default {
      * @param  {object} event
      */
     uploadFile(e) {
-      const file = e.target.files && e.target.files.length ? e.target.files[0] : null
-      if (file) {
-        this.emitLoad()
-        this.handleFile(file)
-      }
+      const files = [...e.target.files]
+
+      files.forEach(file => {
+        if (file) {
+          this.emitLoad()
+          this.handleFile(file)
+        }
+      })
     },
 
     /**
@@ -393,7 +402,7 @@ export default {
 
       // Display preview of the new image
       if (this.preview) {
-        this.imagePreview = imageData
+        this.imagePreview.push(imageData)
       }
 
       // Return the new image
