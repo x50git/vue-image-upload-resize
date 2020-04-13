@@ -7,6 +7,7 @@
       :debug="1"
       doNotResize="gif"
       :autoRotate="true"
+      :multiple="true"
       outputFormat="verbose"
       @input="setImage"
     >
