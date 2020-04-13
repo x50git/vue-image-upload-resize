@@ -1270,12 +1270,12 @@ module.exports = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE
 
 "use strict";
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"4e78570d-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/ImageUploader.vue?vue&type=template&id=f5e447ea&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_vm._l((_vm.imagePreview),function(preview,index){return _c('img',{directives:[{name:"show",rawName:"v-show",value:(_vm.imagePreview),expression:"imagePreview"}],key:index,staticClass:"img-preview",attrs:{"src":preview,"width":"400"}})}),_c('input',{class:_vm.className,attrs:{"id":_vm.id,"type":"file","accept":_vm.accept,"capture":_vm.capture,"multiple":_vm.multiple},on:{"change":_vm.uploadFile}}),_vm._t("upload-label")],2)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"4e78570d-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/ImageUploader.vue?vue&type=template&id=6f762745&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_vm._l((_vm.imagePreview),function(preview,index){return _c('img',{directives:[{name:"show",rawName:"v-show",value:(_vm.imagePreview),expression:"imagePreview"}],key:index,staticClass:"img-preview",attrs:{"src":preview,"width":"400"}})}),_c('input',{class:_vm.className,attrs:{"id":_vm.id,"type":"file","accept":_vm.accept,"capture":_vm.capture,"multiple":_vm.multiple,"name":_vm.name},on:{"change":_vm.uploadFile}}),_vm._t("upload-label")],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/ImageUploader.vue?vue&type=template&id=f5e447ea&
+// CONCATENATED MODULE: ./src/components/ImageUploader.vue?vue&type=template&id=6f762745&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.function.name.js
 var es6_function_name = __webpack_require__("7f7f");
@@ -2270,7 +2270,7 @@ var canvas_to_blob_default = /*#__PURE__*/__webpack_require__.n(canvas_to_blob);
 /**
  * A Vue component for multiple file upload w/ client-side resizing & compression of images.
  *
- * Code based on 
+ * Code based on
  *  - ImageUploader (c) Ross Turner (https://github.com/rossturner/HTML5-ImageUploader), and
  *  - vue-upload-image-resize (https://github.com/kartoteket/vue-image-upload-resize), and
  *  - exif.js (https://github.com/exif-js/exif-js)
@@ -2456,6 +2456,16 @@ var canvas_to_blob_default = /*#__PURE__*/__webpack_require__.n(canvas_to_blob);
     multiple: {
       type: Boolean,
       default: false
+    },
+
+    /**
+     * Name attribute used for the form's input element.
+     * @default 'fileInput'
+     * @type {String}
+     */
+    name: {
+      type: String,
+      default: 'fileInput'
     }
   },
   data: function data() {
